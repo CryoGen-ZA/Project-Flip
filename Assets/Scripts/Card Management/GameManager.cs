@@ -1,3 +1,4 @@
+using System;
 using Card;
 using UnityEngine;
 
@@ -11,6 +12,17 @@ namespace Card_Management
         public int _rows;
         public int _columns;
         public CardInfoSO cardInfo;
+        
+        public static GameManager Instance { get; private set; }
+        public MatchingManager MatchManager => _matchingManager;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+                Destroy(gameObject);
+            else
+                Instance = this;
+        }
 
         private void Start()
         {
