@@ -26,6 +26,7 @@ namespace Card_Management
                 Instance = this;
 
             _audioSource = GetComponent<AudioSource>();
+            cardInfo = PlayerData.CurrentActiveTheme;
         }
 
         private void Update()
