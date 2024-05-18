@@ -52,7 +52,7 @@ namespace Card_Management
             var cardObjectTransform = cardObject.GetComponent<Transform>();
             cardObjectTransform.position = new Vector3(xPos, yPos, 0);
             
-            //Setup card logic class, we decouple this from Monobehaviour so we can control the updates and lifetime
+            //Setup card logic class, we dont use Monobehaviour so we can control the updates and lifetime
             var newCardController = new CardController(cardObjectTransform, spriteRenderer, _cardDimensions);
             
             return newCardController;
