@@ -8,6 +8,7 @@ namespace Card_Management
     {
         private MatchingManager _matchingManager;
         private Camera _cam;
+        private AudioSource _audioSource;
         
         public int _rows;
         public int _columns;
@@ -23,6 +24,8 @@ namespace Card_Management
                 Destroy(gameObject);
             else
                 Instance = this;
+
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -75,6 +78,13 @@ namespace Card_Management
         public void ScoreUpdate(int currentScore, int currentCombo)
         {
             OnScoreUpdate?.Invoke(currentScore, currentCombo);
+        }
+
+        public void PlaySFX(AudioClip clip)
+        {
+            if (clip == null || _audioSource == null) return;
+            
+            _audioSource.PlayOneShot(clip);
         }
     }
 }

@@ -118,6 +118,7 @@ namespace Card_Management
             }
 
             card.FlipCard();
+            GameManager.Instance.PlaySFX(_cardInfoSo.flipSfx);
             _activeCards.Add(card);
         }
 
@@ -138,6 +139,7 @@ namespace Card_Management
             currentCombo++;
 
             GameManager.Instance.ScoreUpdate(currentScore, currentCombo);
+            GameManager.Instance.PlaySFX(_cardInfoSo.matchConfirmedSfx);
         }
     }
 }

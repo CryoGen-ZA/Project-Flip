@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Card
 {
@@ -13,5 +14,8 @@ namespace Card
         public Vector2 cardDimensions;
         public Vector2 cardPadding;
         public float flipTime = 1f;
+        
+        public AudioClip flipSfx;
+        public AudioClip matchConfirmedSfx;
     }
 }
