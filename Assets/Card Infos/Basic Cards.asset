@@ -15,6 +15,10 @@ MonoBehaviour:
   themeName: Basic
   cardGraphicFront: {fileID: 21300000, guid: a77bab1ea98af66458eea7607b4a6c7f, type: 3}
   cardGraphicBack: {fileID: 21300000, guid: a77bab1ea98af66458eea7607b4a6c7f, type: 3}
-  cardIcons: []
+  cardIcons:
+  - {fileID: -157762524, guid: d1c85646581afb048b3079fe82e7483d, type: 3}
+  - {fileID: 578075468, guid: d1c85646581afb048b3079fe82e7483d, type: 3}
+  - {fileID: -1458386372, guid: d1c85646581afb048b3079fe82e7483d, type: 3}
+  - {fileID: -144986418, guid: d1c85646581afb048b3079fe82e7483d, type: 3}
   cardDimensions: {x: 1, y: 1.5}
   cardPadding: {x: 0.2, y: 0.2}
