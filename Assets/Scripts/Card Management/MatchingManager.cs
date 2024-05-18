@@ -26,4 +26,13 @@ public class MatchingManager
             card.SetupCardInfo(_cardInfoSo.cardGraphicBack, _cardInfoSo.cardGraphicFront, _cardInfoSo.cardIcons[0], 0, _cardInfoSo.flipTime);
         }
     }
+
+    public void CheckForCardClick(Vector3 mouseWorldPos)
+    {
+        foreach (var card in _cards)
+        {
+            if (!card.IsMouseOverCard(mouseWorldPos)) continue;
+            break;
+        }
+    }
 }
