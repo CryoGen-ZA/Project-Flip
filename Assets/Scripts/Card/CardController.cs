@@ -92,18 +92,24 @@ namespace Card
             _cardId = cardId;
             _flipSpeed = flipSpeed;
 
+            _isFlipped = false;
+            _match = false;
+
             SetupCardIcon();
         }
 
         private void SetupCardIcon()
         {
-            var _cardIconObject = new GameObject($"Card Icon {_cardId}");
-            _cardIconObject.transform.SetParent(this._cardTransform);
-            _cardIconRenderer = _cardIconObject.AddComponent<SpriteRenderer>();
+            if (_cardIconRenderer == null)
+            {
+                var cardIconObject = new GameObject($"Card Icon {_cardId}");
+                cardIconObject.transform.SetParent(this._cardTransform);
+                _cardIconRenderer = cardIconObject.AddComponent<SpriteRenderer>();
+                cardIconObject.transform.position = _cardTransform.position + -Vector3.forward * 0.1f;
+            }
             _cardIconRenderer.sprite = _cardIcon;
             _cardIconRenderer.size = new Vector2(_cardRenderer.size.x / 2, _cardRenderer.size.y / 2);
-            _cardIconObject.transform.position = _cardTransform.position + -Vector3.forward * 0.1f;
-            _cardIconObject.SetActive(false);
+            _cardIconRenderer.gameObject.SetActive(false);
         }
 
         public bool IsMouseOverCard(Vector3 mouseWorldPos)
