@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Card;
+using Card_Management;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -32,9 +33,14 @@ public class MatchingManager
         {
             var card = _activeCards[index];
             
+            if (card.isMatched && card.IsDoneAnimating() && card.isFlipped)
+            {
+                _activeCards.Remove(card);
+            }
+            
             if (card.IsDoneAnimating() && !card.isFlipped) _activeCards.Remove(card);
             
-            else if (card.IsDoneAnimating() && card != _firstCard && card != _secondCard)
+            if (card.IsDoneAnimating() && card != _firstCard && card != _secondCard)
                 card.FlipCard();
             
             card.DoUpdate();
@@ -89,7 +95,7 @@ public class MatchingManager
 
     private void AssignCard(CardController card)
     {
-        if (_activeCards.Contains(card)) return;
+        if (_activeCards.Contains(card) || card.isMatched) return;
         
         if (_firstCard != null && _secondCard != null)
         {
@@ -105,10 +111,23 @@ public class MatchingManager
             else if (_secondCard == null)
             {
                 _secondCard = card;
+                ConfirmMatch();
             }
         }
 
         card.FlipCard();
         _activeCards.Add(card);
+    }
+
+    private void ConfirmMatch()
+    {
+        if (_firstCard == null || _secondCard == null) return;
+
+        if (_firstCard.cardId != _secondCard.cardId) return;
+        
+        _firstCard.SetMatched();
+        _secondCard.SetMatched();
+
+        GameManager.Instance.FireMatchConfirm();
     }
 }

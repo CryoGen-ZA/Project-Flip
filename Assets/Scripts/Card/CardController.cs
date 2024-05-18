@@ -18,6 +18,9 @@ namespace Card
         private float _flipSpeed;
         private float _currentAnimatingTime;
         private bool _invertAnimation;
+        private bool _match;
+
+        public int cardId => _cardId;
 
         public CardController(Transform cardObjectTransform, SpriteRenderer spriteRenderer, Vector2 cardSize)
         {
@@ -30,6 +33,7 @@ namespace Card
         }
 
         public bool isFlipped => _isFlipped;
+        public bool isMatched => _match;
 
         public void DoUpdate()
         {
@@ -111,5 +115,10 @@ namespace Card
         public void FlipCard() => _animating = true;
 
         public bool IsDoneAnimating() => _animating == false;
+
+        public void SetMatched()
+        {
+            _match = true;
+        }
     }
 }

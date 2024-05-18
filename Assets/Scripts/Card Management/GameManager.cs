@@ -15,6 +15,7 @@ namespace Card_Management
         
         public static GameManager Instance { get; private set; }
         public MatchingManager MatchManager => _matchingManager;
+        public event Action OnMatchConfirm;
 
         private void Awake()
         {
@@ -69,6 +70,11 @@ namespace Card_Management
             _cam.orthographicSize = layoutWidthRatio < layoutHeightRatio ? 
                 totalHeight / 2 : 
                 totalWidth / 2 / _cam.aspect;
+        }
+
+        public void FireMatchConfirm()
+        {
+            OnMatchConfirm?.Invoke();
         }
     }
 }
