@@ -12,10 +12,10 @@ namespace Card_Management
         public int _rows;
         public int _columns;
         public CardInfoSO cardInfo;
-        
-        public static GameManager Instance { get; private set; }
         public MatchingManager MatchManager => _matchingManager;
-        public event Action OnMatchConfirm;
+
+        public static GameManager Instance { get; private set; }
+        public static event Action<int, int> OnScoreUpdate;
 
         private void Awake()
         {
@@ -72,9 +72,9 @@ namespace Card_Management
                 totalWidth / 2 / _cam.aspect;
         }
 
-        public void FireMatchConfirm()
+        public void ScoreUpdate(int currentScore, int currentCombo)
         {
-            OnMatchConfirm?.Invoke();
+            OnScoreUpdate?.Invoke(currentScore, currentCombo);
         }
     }
 }
