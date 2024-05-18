@@ -18,6 +18,8 @@ namespace Card_Management
         private int currentScore;
         private int currentCombo;
 
+        private int _currentMatchCount;
+
         public MatchingManager(List<CardController> generatedCards, CardInfoSO cardInfo)
         {
             if (generatedCards is not { Count: > 0 })
@@ -51,6 +53,10 @@ namespace Card_Management
 
         public void SetupCards()
         {
+            _currentMatchCount = 0;
+            currentScore = 0;
+            currentCombo = 0;
+            
             //Create ID list
             var ids = new List<int>();
 
@@ -66,7 +72,6 @@ namespace Card_Management
             for (var index = 0; index < _cards.Count; index++)
             {
                 var card = _cards[index];
-                if ( index >= ids.Count || ids[index] >= _cardInfoSo.cardIcons.Length) Debugger.Break();
                 var cardIcon = _cardInfoSo.cardIcons[ids[index]];
                 var id = ids[index];
                 card.SetupCardInfo(_cardInfoSo.cardGraphicBack, _cardInfoSo.cardGraphicFront, cardIcon, id,
@@ -134,12 +139,18 @@ namespace Card_Management
         
             _firstCard.SetMatched();
             _secondCard.SetMatched();
+            _currentMatchCount += 2;
 
             currentScore += 2 + (2 * currentCombo);
             currentCombo++;
 
             GameManager.Instance.ScoreUpdate(currentScore, currentCombo);
             GameManager.Instance.PlaySFX(_cardInfoSo.matchConfirmedSfx);
+            
+            if (_currentMatchCount == _cards.Count)
+            {
+                GameManager.Instance.FireGameCompleted(currentScore);
+            }
         }
     }
 }

@@ -598,7 +598,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 854804434}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1347128572}
+        m_TargetAssemblyTypeName: Card_Management.GameManager, Assembly-CSharp
+        m_MethodName: ResetGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &854804434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1148,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1247142651}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1347128572}
+        m_TargetAssemblyTypeName: Card_Management.GameManager, Assembly-CSharp
+        m_MethodName: LeaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1247142651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1450,6 +1474,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 541067576}
   comboText: {fileID: 220547733}
+  gameOverPanel: {fileID: 2083452346}
+  gameOverScoreText: {fileID: 1835805034}
 --- !u!1 &1425964054
 GameObject:
   m_ObjectHideFlags: 0

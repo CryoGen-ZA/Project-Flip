@@ -1,6 +1,7 @@
 using System;
 using Card;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Card_Management
 {
@@ -17,6 +18,8 @@ namespace Card_Management
 
         public static GameManager Instance { get; private set; }
         public static event Action<int, int> OnScoreUpdate;
+        public static event Action<int> OnGameCompleted;
+        public static event Action OnGameRestarted;
 
         private void Awake()
         {
@@ -46,6 +49,17 @@ namespace Card_Management
 
             _cam = Camera.main;
             FitCardLayoutToCameraView(_rows, _columns, cardInfo);
+        }
+        
+        public void ResetGame()
+        {
+            _matchingManager.SetupCards();
+            OnGameRestarted?.Invoke();
+        }
+
+        public void LeaveGame()
+        {
+            SceneManager.LoadScene("Menu Scene");
         }
 
         private void FitCardLayoutToCameraView(int rows, int columns, CardInfoSO cardInfoSo)
@@ -79,6 +93,11 @@ namespace Card_Management
         public void ScoreUpdate(int currentScore, int currentCombo)
         {
             OnScoreUpdate?.Invoke(currentScore, currentCombo);
+        }
+        
+        public void FireGameCompleted(int currentScore)
+        {
+            OnGameCompleted?.Invoke(currentScore);
         }
 
         public void PlaySFX(AudioClip clip)
