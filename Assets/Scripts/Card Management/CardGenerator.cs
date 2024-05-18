@@ -27,18 +27,18 @@ namespace Card_Management
         {
             var generatedCards = new List<CardController>();
     
-            var xPos = 0f;
-            var yPos = 0f;
+            var xPos = _cardDimensions.x / 2 + _cardPadding.x;
+            var yPos = -(_cardDimensions.y / 2 + _cardPadding.y);
         
             for (int x = 0; x < _columns; x++)
             {
-                xPos += (_cardDimensions.x) + _cardPadding.x;
-                
                 for (int y = 0; y < _rows; y++)
                 {
                     var newYPos = yPos - (_cardDimensions.y + _cardPadding.y) * y;
                     generatedCards.Add(GenerateCard(xPos, newYPos));
                 }
+                
+                xPos += _cardDimensions.x + _cardPadding.x;
             }
 
             return generatedCards;
