@@ -34,7 +34,7 @@ namespace Card_Management
             totalWidth += cardInfo.cardPadding.x;
             totalHeight += cardInfo.cardPadding.y;
 
-            var centrePoint = new Vector3(totalWidth / 2f, -totalHeight / 2f, -1);
+            var centrePoint = new Vector3(totalWidth / 2f, -totalHeight / 2f, -10);
 
             _cam.transform.position = centrePoint;
             
