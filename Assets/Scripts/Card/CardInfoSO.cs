@@ -12,5 +12,6 @@ namespace Card
 
         public Vector2 cardDimensions;
         public Vector2 cardPadding;
+        public float flipTime = 1f;
     }
 }

@@ -23,7 +23,7 @@ public class MatchingManager
     {
         foreach (var card in _cards)
         {
-            card.SetupCardInfo(_cardInfoSo.cardGraphicBack, _cardInfoSo.cardGraphicFront);
+            card.SetupCardInfo(_cardInfoSo.cardGraphicBack, _cardInfoSo.cardGraphicFront, _cardInfoSo.cardIcons[0], 0, _cardInfoSo.flipTime);
         }
     }
 }

@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b7edca3c5577e4c81adc90b6cb0a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rows: 3
-  _columns: 3
+  _rows: 5
+  _columns: 5
   cardInfo: {fileID: 11400000, guid: de378fe91d64a864994ea28616a32b7c, type: 2}
 --- !u!4 &1347128573
 Transform:
