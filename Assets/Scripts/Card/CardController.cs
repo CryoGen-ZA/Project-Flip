@@ -4,7 +4,7 @@ namespace Card
 {
     public class CardController
     {
-        private Transform _cardTransform;
+        public Transform _cardTransform;
         private SpriteRenderer _cardRenderer;
 
         private Sprite _backGraphic;
@@ -33,6 +33,12 @@ namespace Card
 
             _cardRenderer.sprite = _backGraphic;
             _cardRenderer.size = cardDimension;
+        }
+
+        public bool IsMouseOverCard(Vector3 mouseWorldPos)
+        {
+            var cardBounds = _cardRenderer.bounds;
+            return cardBounds.Contains(mouseWorldPos); //TODO: Change this to a custom detection check as Contains is an Injected call
         }
     }
 }
