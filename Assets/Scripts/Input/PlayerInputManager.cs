@@ -1,20 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Card_Management;
 using UnityEngine;
 
-public class PlayerInputManager : MonoBehaviour
+namespace Input
 {
-    private void Update()
+    public class PlayerInputManager : MonoBehaviour
     {
-        if (GameManager.Instance == null || GameManager.Instance.MatchManager == null) return;
-
-        if (Input.GetMouseButtonDown(0))
+        private void Update()
         {
-            var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = 0;
-            GameManager.Instance.MatchManager.CheckForCardClick(mouseWorldPos);
+            if (GameManager.Instance == null || GameManager.Instance.MatchManager == null) return;
+
+            if (UnityEngine.Input.GetMouseButtonDown(0))
+            {
+                var mouseWorldPos = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+                mouseWorldPos.z = 0;
+                GameManager.Instance.MatchManager.CheckForCardClick(mouseWorldPos);
+            }
         }
     }
 }
