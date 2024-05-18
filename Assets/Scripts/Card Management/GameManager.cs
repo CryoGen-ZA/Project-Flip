@@ -24,6 +24,11 @@ namespace Card_Management
                 Instance = this;
         }
 
+        private void Update()
+        {
+            _matchingManager?.DoUpdate();
+        }
+
         private void Start()
         {
             var cardGenerator = new CardGenerator(_rows, _columns, cardInfo);

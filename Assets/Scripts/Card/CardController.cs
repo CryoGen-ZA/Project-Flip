@@ -29,6 +29,8 @@ namespace Card
             _cardTransform.localScale = Vector3.one;
         }
 
+        public bool isFlipped => _isFlipped;
+
         public void DoUpdate()
         {
             if (!_animating) return;
@@ -51,7 +53,7 @@ namespace Card
 
         private bool AnimateCard(bool invert)
         {
-            var normalizedTime = _currentAnimatingTime / _flipSpeed;
+            var normalizedTime = _currentAnimatingTime / (_flipSpeed / 2);
             
             var targetScale = invert ? Vector3.one : Vector3.up;
             var currentScale = invert ? Vector3.up : Vector3.one;
@@ -68,6 +70,7 @@ namespace Card
 
         private void FlipVisuals()
         {
+            _isFlipped = !_isFlipped;
             _cardRenderer.sprite = _isFlipped ? _frontGraphic : _backGraphic;
             _cardIconRenderer.gameObject.SetActive(_isFlipped);
         }
@@ -104,5 +107,9 @@ namespace Card
             var cardBounds = _cardRenderer.bounds;
             return cardBounds.Contains(mouseWorldPos); //TODO: Change this to a custom detection check as Contains is an Injected call
         }
+
+        public void FlipCard() => _animating = true;
+
+        public bool IsDoneAnimating() => _animating == false;
     }
 }
