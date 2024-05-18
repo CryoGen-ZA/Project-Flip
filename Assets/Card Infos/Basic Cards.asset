@@ -23,3 +23,5 @@ MonoBehaviour:
   cardDimensions: {x: 1, y: 1.5}
   cardPadding: {x: 0.2, y: 0.2}
   flipTime: 0.5
+  flipSfx: {fileID: 8300000, guid: 25594a46e5c49404391f39bb8e2fc437, type: 3}
+  matchConfirmedSfx: {fileID: 8300000, guid: 8e10e44172ecde84b83b212633896b57, type: 3}

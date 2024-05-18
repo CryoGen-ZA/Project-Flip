@@ -116,6 +116,7 @@ public class MatchingManager
         }
 
         card.FlipCard();
+        GameManager.Instance.PlaySFX(_cardInfoSo.flipSfx);
         _activeCards.Add(card);
     }
 
@@ -129,5 +130,6 @@ public class MatchingManager
         _secondCard.SetMatched();
 
         GameManager.Instance.FireMatchConfirm();
+        GameManager.Instance.PlaySFX(_cardInfoSo.matchConfirmedSfx);
     }
 }
