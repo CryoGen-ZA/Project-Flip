@@ -53,7 +53,8 @@ public class MainMenuManager : MonoBehaviour
     {
         continueButton.interactable = PlayerDataSerializer.PlayerHasData();
         QualitySettings.vSyncCount = 0;
-        FpsText.text = $"{Application.targetFrameRate} FPS";
+        if (Application.targetFrameRate == -1)
+            ToggleFPS();
         UpdateFPSText();
     }
 
@@ -106,7 +107,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void ToggleFPS()
     {
-        Application.targetFrameRate = Application.targetFrameRate == 60 ? 30 : 60;
+        Application.targetFrameRate = Application.targetFrameRate == 30 ? 60 : 30;
         UpdateFPSText();
     }
     
