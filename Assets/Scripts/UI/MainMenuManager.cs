@@ -18,6 +18,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_InputField rowInput;
     [SerializeField] private TMP_InputField columnInput;
     [SerializeField] private TextMeshProUGUI errorWarning;
+
+    private const string GameplayScene = "GamePlay Scene";
     
     public void OnNewGameSelected(Vector2Int layout)
     {
@@ -34,8 +36,6 @@ public class MainMenuManager : MonoBehaviour
        var storedTheme = PlayerData.CurrentActiveTheme = cardInfo.FirstOrDefault(t => t.themeName == PlayerData.MatchData.cardInfoID);
        if (storedTheme == null)
            storedTheme = cardInfo[0];
-
-       PlayerData.CurrentActiveTheme = storedTheme;
        
        StartNewGame(storedTheme);
     }
@@ -43,7 +43,7 @@ public class MainMenuManager : MonoBehaviour
     private void StartNewGame(CardInfoSO cardInfo)
     {
         PlayerData.CurrentActiveTheme = cardInfo;
-        SceneManager.LoadScene("GamePlay Scene");
+        SceneManager.LoadScene(GameplayScene);
     }
 
     private void Awake()
@@ -81,24 +81,21 @@ public class MainMenuManager : MonoBehaviour
 
     public void CustomLayoutChosen()
     {
+        //we do validation check on the character types so we dont need to tryParse
+        if (rowInput.characterValidation != TMP_InputField.CharacterValidation.Integer || 
+            columnInput.characterValidation != TMP_InputField.CharacterValidation.Integer) return;
+        
         var rows = int.Parse(rowInput.text);
         var columns = int.Parse(columnInput.text);
 
-        if (IsEven(rows * columns))
-        {
+        if (rows > 0 && columns > 0 && IsEven(rows * columns))
             OnNewGameSelected(new Vector2Int(columns, rows));
-        }
         else
-        {
             errorWarning.text =
                 $"Oh oh, {rows} x {columns} results in an uneven amount of cells, please try a different combination";
-        }
+        
     }
 
-    public void QuitApplication()
-    {
-        Application.Quit();
-    }
-
+    public void QuitApplication() => Application.Quit();
     private bool IsEven(int totalCards) => totalCards % 2 == 0;
 }
