@@ -1942,7 +1942,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1347128572}
         m_TargetAssemblyTypeName: Card_Management.GameManager, Assembly-CSharp
-        m_MethodName: LeaveGame
+        m_MethodName: QuitWithoutSaving
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2076,7 +2076,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1347128572}
         m_TargetAssemblyTypeName: Card_Management.GameManager, Assembly-CSharp
-        m_MethodName: LeaveGame
+        m_MethodName: QuitWithoutSaving
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2155,9 +2155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b7edca3c5577e4c81adc90b6cb0a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rows: 2
-  _columns: 4
-  cardInfo: {fileID: 11400000, guid: de378fe91d64a864994ea28616a32b7c, type: 2}
 --- !u!4 &1347128573
 Transform:
   m_ObjectHideFlags: 0
@@ -3092,7 +3089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2083452347
 RectTransform:
   m_ObjectHideFlags: 0

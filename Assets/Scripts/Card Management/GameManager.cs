@@ -99,6 +99,12 @@ namespace Card_Management
             SceneManager.LoadScene("Menu Scene");
         }
 
+        public void QuitWithoutSaving()
+        {
+            PlayerDataSerializer.DeleteSaveData();
+            LeaveGame();
+        }
+
         public void QuitAndSave()
         {
             SaveGame();
