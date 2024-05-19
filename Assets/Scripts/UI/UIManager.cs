@@ -59,7 +59,6 @@ namespace UI
         {
             pausePanel.SetActive(false);
             GameManager.Instance.PauseGame(false);
-
         }
     }
 }

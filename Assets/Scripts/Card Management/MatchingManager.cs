@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Card;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -11,16 +9,16 @@ namespace Card_Management
     public class MatchingManager
     {
         private List<CardController> _cards = new();
-        private CardInfoSO _cardInfoSo;
-    
+        private List<CardController> _activeCards = new();
+        private readonly CardInfoSO _cardInfoSo;
+
         private CardController _firstCard;
         private CardController _secondCard;
 
-        private List<CardController> _activeCards = new();
-        private int currentScore;
-        private int currentCombo;
-
+        private int _currentScore;
+        private int _currentCombo;
         private int _currentMatchCount;
+
 
         public MatchingManager(List<CardController> generatedCards, CardInfoSO cardInfo)
         {
@@ -39,14 +37,13 @@ namespace Card_Management
             {
                 var card = _activeCards[index];
             
-                if (card.isMatched && card.IsDoneAnimating() && card.isFlipped)
-                {
+                if (card.IsMatched && card.IsDoneAnimating() && card.IsFlipped)
                     _activeCards.Remove(card);
-                }
             
-                if (card.IsDoneAnimating() && !card.isFlipped) _activeCards.Remove(card);
+                else if (card.IsDoneAnimating() && !card.IsFlipped) 
+                    _activeCards.Remove(card);
             
-                if (card.IsDoneAnimating() && card != _firstCard && card != _secondCard)
+                else if (card.IsDoneAnimating() && card != _firstCard && card != _secondCard)
                     card.FlipCard();
             
                 card.DoUpdate();
@@ -56,8 +53,8 @@ namespace Card_Management
         public void SetupCards()
         {
             _currentMatchCount = 0;
-            currentScore = 0;
-            currentCombo = 0;
+            _currentScore = 0;
+            _currentCombo = 0;
             
             //Create ID list
             var ids = new List<int>();
@@ -104,24 +101,21 @@ namespace Card_Management
 
         private void AssignCard(CardController card)
         {
-            if (_activeCards.Contains(card) || card.isMatched) return;
+            if (_activeCards.Contains(card) || card.IsMatched) return;
         
             if (_firstCard != null && _secondCard != null)
             {
                 _firstCard = card;
                 _secondCard = null;
             }
-            else
+            else if (_firstCard == null)
             {
-                if (_firstCard == null)
-                {
-                    _firstCard = card;
-                }
-                else if (_secondCard == null)
-                {
-                    _secondCard = card;
-                    ConfirmMatch();
-                }
+                _firstCard = card;
+            }
+            else 
+            {
+                _secondCard = card;
+                ConfirmMatch();
             }
 
             card.FlipCard();
@@ -135,7 +129,7 @@ namespace Card_Management
 
             if (_firstCard.cardId != _secondCard.cardId)
             {
-                currentCombo = 0;
+                _currentCombo = 0;
                 GameManager.Instance.PlaySFX(_cardInfoSo.matchIncorrectSfx);
                 return;
             }
@@ -144,15 +138,15 @@ namespace Card_Management
             _secondCard.SetMatched();
             _currentMatchCount += 2;
 
-            currentScore += 2 + (2 * currentCombo);
-            currentCombo++;
+            _currentScore += 2 + 2 * _currentCombo;
+            _currentCombo++;
 
-            GameManager.Instance.ScoreUpdate(currentScore, currentCombo);
+            GameManager.Instance.ScoreUpdate(_currentScore, _currentCombo);
             GameManager.Instance.PlaySFX(_cardInfoSo.matchConfirmedSfx);
             
             if (_currentMatchCount == _cards.Count)
             {
-                GameManager.Instance.FireGameCompleted(currentScore);
+                GameManager.Instance.FireGameCompleted(_currentScore);
                 GameManager.Instance.PlaySFX(_cardInfoSo.completedSfx);
             }
         }
@@ -167,22 +161,23 @@ namespace Card_Management
                 _activeCards.Add(card);
             }
 
-            currentScore = matchDataScore;
-            currentCombo = matchDataComboMultiplier;
+            _currentScore = matchDataScore;
+            _currentCombo = matchDataComboMultiplier;
             _currentMatchCount = matchDataMatchedCards.Count;
-            GameManager.Instance.ScoreUpdate(currentScore, currentCombo);
+            GameManager.Instance.ScoreUpdate(_currentScore, _currentCombo);
         }
 
-        public int GetCurrentScore() => currentScore;
+        public int GetCurrentScore() => _currentScore;
 
-        public int GetcurrentCombo() => currentCombo;
+        public int GetCurrentCombo() => _currentCombo;
 
         public List<int> GetMatchedCards()
         {
+            //Readability Could be improved by Linq expressions but opted not to as it comes with a performance cost on mobile
             var matchCardsList = new List<int>();
             for (int i = 0; i < _cards.Count; i++)
             {
-                if (_cards[i].isMatched)
+                if (_cards[i].IsMatched)
                     matchCardsList.Add(i);
             }
             return matchCardsList;

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -11,14 +10,15 @@ public static class PlayerDataSerializer
     public static void Save()
     {
         if (PlayerData.MatchData == null)
+        {
             Debug.LogError("Unable to save data, no player match data set");
+            return;
+        }
         
         var data = PlayerData.MatchData;
-
         var jsonData = JsonUtility.ToJson(data);
 
         Directory.CreateDirectory(savePath);
-        
         File.WriteAllText(savePath + saveFileName, jsonData, Encoding.Default);
     }
 
@@ -28,8 +28,12 @@ public static class PlayerDataSerializer
         
         var jsonData = File.ReadAllText(savePath + saveFileName, Encoding.Default);
         PlayerData.MatchData = JsonUtility.FromJson<PlayerMatchData>(jsonData);
-        
-        File.Delete(savePath + saveFileName);
+    }
+
+    public static void DeleteSaveData()
+    {
+        if (PlayerHasData())
+            File.Delete(savePath + saveFileName);
     }
 
     public static bool PlayerHasData() => File.Exists(savePath + saveFileName);
