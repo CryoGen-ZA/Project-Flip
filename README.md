@@ -8,16 +8,16 @@ Everything in the project is made from scratch so no additional packages are nee
 This includes the visuals, only the audio is sourced from freesound.org, but they are CC0 so no creditation is required.
 
 Core Features:
--Card generation and shuffling, no predefined game objects
--Matching functionality
--Serialization and Deserialization of matches for save and load functionality
--Audio cues played when matching, mismatching and finishing a game
--Scoring system
+- Card generation and shuffling, no predefined game objects
+- Matching functionality
+- Serialization and Deserialization of matches for save and load functionality
+- Audio cues played when matching, mismatching and finishing a game
+- Scoring system
 
 Additional Features:
--Menu system (Main menu, Result screen, Pause screen and a Layout selection screen)
--Randomized card theme, currently there is only two themes, but its designed to easily add more with only a scriptable object setup
--Combo System
+- Menu system (Main menu, Result screen, Pause screen and a Layout selection screen)
+- Randomized card theme, currently there is only two themes, but its designed to easily add more with only a scriptable object setup
+- Combo System
 
 Additional notes:
 
