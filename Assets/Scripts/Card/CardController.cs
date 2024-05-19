@@ -4,7 +4,7 @@ namespace Card
 {
     public class CardController
     {
-        public Transform _cardTransform;
+        private Transform _cardTransform;
         private SpriteRenderer _cardRenderer;
         private SpriteRenderer _cardIconRenderer;
 
@@ -14,13 +14,15 @@ namespace Card
         private int _cardId;
         
         private bool _isFlipped;
-        private bool _animating;
+        private bool _isAnimating;
         private float _flipSpeed;
         private float _currentAnimatingTime;
         private bool _invertAnimation;
         private bool _match;
 
         public int cardId => _cardId;
+        public bool IsFlipped => _isFlipped;
+        public bool IsMatched => _match;
 
         public CardController(Transform cardObjectTransform, SpriteRenderer spriteRenderer, Vector2 cardSize)
         {
@@ -32,12 +34,9 @@ namespace Card
             _cardTransform.localScale = Vector3.one;
         }
 
-        public bool isFlipped => _isFlipped;
-        public bool isMatched => _match;
-
         public void DoUpdate()
         {
-            if (!_animating) return;
+            if (!_isAnimating) return;
             
             if (!_invertAnimation)
             {
@@ -50,7 +49,7 @@ namespace Card
             {
                 if (!AnimateCard(true)) return;
                     
-                _animating = false;
+                _isAnimating = false;
                 _invertAnimation = false;
             }
         }
@@ -103,28 +102,26 @@ namespace Card
             if (_cardIconRenderer == null)
             {
                 var cardIconObject = new GameObject($"Card Icon {_cardId}");
-                cardIconObject.transform.SetParent(this._cardTransform);
+                cardIconObject.transform.SetParent(_cardTransform);
                 _cardIconRenderer = cardIconObject.AddComponent<SpriteRenderer>();
                 cardIconObject.transform.position = _cardTransform.position + -Vector3.forward * 0.1f;
             }
             _cardIconRenderer.sprite = _cardIcon;
-            _cardIconRenderer.size = new Vector2(_cardRenderer.size.x / 2, _cardRenderer.size.y / 2);
+            var rendererSize = _cardRenderer.size;
+            _cardIconRenderer.size = new Vector2(rendererSize.x / 2, rendererSize.y / 2);
             _cardIconRenderer.gameObject.SetActive(false);
         }
 
         public bool IsMouseOverCard(Vector3 mouseWorldPos)
         {
             var cardBounds = _cardRenderer.bounds;
-            return cardBounds.Contains(mouseWorldPos); //TODO: Change this to a custom detection check as Contains is an Injected call
+            return cardBounds.Contains(mouseWorldPos);
         }
 
-        public void FlipCard() => _animating = true;
+        public void FlipCard() => _isAnimating = true;
 
-        public bool IsDoneAnimating() => _animating == false;
+        public bool IsDoneAnimating() => _isAnimating == false;
 
-        public void SetMatched()
-        {
-            _match = true;
-        }
+        public void SetMatched() => _match = true;
     }
 }

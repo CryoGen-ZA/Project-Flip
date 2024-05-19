@@ -37,10 +37,10 @@ namespace Card_Management
             {
                 var card = _activeCards[index];
             
-                if (card.isMatched && card.IsDoneAnimating() && card.isFlipped)
+                if (card.IsMatched && card.IsDoneAnimating() && card.IsFlipped)
                     _activeCards.Remove(card);
             
-                else if (card.IsDoneAnimating() && !card.isFlipped) 
+                else if (card.IsDoneAnimating() && !card.IsFlipped) 
                     _activeCards.Remove(card);
             
                 else if (card.IsDoneAnimating() && card != _firstCard && card != _secondCard)
@@ -101,7 +101,7 @@ namespace Card_Management
 
         private void AssignCard(CardController card)
         {
-            if (_activeCards.Contains(card) || card.isMatched) return;
+            if (_activeCards.Contains(card) || card.IsMatched) return;
         
             if (_firstCard != null && _secondCard != null)
             {
@@ -177,7 +177,7 @@ namespace Card_Management
             var matchCardsList = new List<int>();
             for (int i = 0; i < _cards.Count; i++)
             {
-                if (_cards[i].isMatched)
+                if (_cards[i].IsMatched)
                     matchCardsList.Add(i);
             }
             return matchCardsList;
