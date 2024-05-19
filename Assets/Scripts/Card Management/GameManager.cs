@@ -50,8 +50,8 @@ namespace Card_Management
             else
             {
                 _currentSeed = (int)DateTime.Now.Ticks;
-                _rows = PlayerData.layout.y;
-                _columns = PlayerData.layout.x;
+                _rows = PlayerData.Layout.y;
+                _columns = PlayerData.Layout.x;
             }
             
             Random.InitState(_currentSeed);

@@ -22,7 +22,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnNewGameSelected(Vector2Int layout)
     {
         PlayerData.MatchData = null;
-        PlayerData.layout = layout;
+        PlayerData.Layout = layout;
         var randomIndex = Random.Range(0, cardInfo.Length);
         StartNewGame(cardInfo[randomIndex]);
     }
