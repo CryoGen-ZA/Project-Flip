@@ -1,4 +1,3 @@
-using System;
 using Card_Management;
 using TMPro;
 using UnityEngine;
@@ -14,6 +13,8 @@ namespace UI
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private TextMeshProUGUI gameOverScoreText;
     
+        [SerializeField] private GameObject pausePanel;
+
         private void Awake()
         {
             GameManager.OnScoreUpdate += UpdateScore;
@@ -46,6 +47,19 @@ namespace UI
         {
             if (scoreText != null) scoreText.text = $"Score: {currentScore}";
             if (comboText != null) comboText.text = comboCount > 1 ? $"Combo: x{comboCount}" : "";
+        }
+
+        public void ShowPauseMenu()
+        {
+            pausePanel.SetActive(true);
+            GameManager.Instance.PauseGame(true);
+        }
+        
+        public void ClosePauseMenu()
+        {
+            pausePanel.SetActive(false);
+            GameManager.Instance.PauseGame(false);
+
         }
     }
 }

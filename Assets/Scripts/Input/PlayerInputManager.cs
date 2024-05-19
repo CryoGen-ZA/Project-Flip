@@ -8,6 +8,7 @@ namespace Input
         private void Update()
         {
             if (GameManager.Instance == null || GameManager.Instance.MatchManager == null) return;
+            if (GameManager.Instance.IsGamePaused()) return;
 
             if (UnityEngine.Input.GetMouseButtonDown(0))
             {

@@ -2,6 +2,7 @@ using System;
 using Card;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Card_Management
 {
@@ -21,6 +22,9 @@ namespace Card_Management
         public static event Action<int> OnGameCompleted;
         public static event Action OnGameRestarted;
 
+        private int currentSeed;
+        private bool _paused;
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -29,6 +33,17 @@ namespace Card_Management
                 Instance = this;
 
             _audioSource = GetComponent<AudioSource>();
+
+            if (PlayerData.MatchData != null)
+            {
+                _rows = PlayerData.MatchData.layoutInfo.y;
+                _columns = PlayerData.MatchData.layoutInfo.x;
+                currentSeed = PlayerData.MatchData.seedKey;
+            }
+            else
+                currentSeed = (int)DateTime.Now.Ticks;
+            
+            Random.InitState(currentSeed);
             cardInfo = PlayerData.CurrentActiveTheme;
         }
 
@@ -47,12 +62,17 @@ namespace Card_Management
             if (_matchingManager != null)
                 _matchingManager.SetupCards();
 
+            if (PlayerData.MatchData != null)
+                _matchingManager.RestorePreviousMatch(PlayerData.MatchData.matchedCards, PlayerData.MatchData.score, PlayerData.MatchData.comboMultiplier);
+            
             _cam = Camera.main;
             FitCardLayoutToCameraView(_rows, _columns, cardInfo);
         }
         
         public void ResetGame()
         {
+            currentSeed = (int)DateTime.Now.Ticks;
+            Random.InitState(currentSeed);
             _matchingManager.SetupCards();
             OnGameRestarted?.Invoke();
         }
@@ -60,6 +80,28 @@ namespace Card_Management
         public void LeaveGame()
         {
             SceneManager.LoadScene("Menu Scene");
+        }
+
+        public void QuitAndSave()
+        {
+            SaveGame();
+            LeaveGame();
+        }
+
+        public void SaveGame()
+        {
+            var playerMatchData = new PlayerMatchData
+            {
+                layoutInfo = new Vector2Int(_columns, _rows),
+                score = _matchingManager.GetCurrentScore(),
+                comboMultiplier = _matchingManager.GetcurrentCombo(),
+                seedKey = currentSeed,
+                cardInfoID = cardInfo.themeName,
+                matchedCards = _matchingManager.GetMatchedCards()
+            };
+
+            PlayerData.MatchData = playerMatchData;
+            PlayerDataSerializer.Save();
         }
 
         private void FitCardLayoutToCameraView(int rows, int columns, CardInfoSO cardInfoSo)
@@ -106,5 +148,12 @@ namespace Card_Management
             
             _audioSource.PlayOneShot(clip);
         }
+
+        public void PauseGame(bool pause)
+        {
+            _paused = pause;
+        }
+
+        public bool IsGamePaused() => _paused;
     }
 }
