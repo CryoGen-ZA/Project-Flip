@@ -98,7 +98,7 @@ namespace Card_Management
             {
                 layoutInfo = new Vector2Int(_columns, _rows),
                 score = _matchingManager.GetCurrentScore(),
-                comboMultiplier = _matchingManager.GetcurrentCombo(),
+                comboMultiplier = _matchingManager.GetCurrentCombo(),
                 seedKey = currentSeed,
                 cardInfoID = cardInfo.themeName,
                 matchedCards = _matchingManager.GetMatchedCards()
