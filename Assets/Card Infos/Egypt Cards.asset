@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55627f323e2b684892be7dd5806031e, type: 3}
   m_Name: Egypt Cards
   m_EditorClassIdentifier: 
-  themeName: Basic
+  themeName: Egypt
   cardGraphicFront: {fileID: -1515063775, guid: f445d0c94ffd0f04dbbd6859aedcec05, type: 3}
   cardGraphicBack: {fileID: 1323582190, guid: f445d0c94ffd0f04dbbd6859aedcec05, type: 3}
   cardIcons:
