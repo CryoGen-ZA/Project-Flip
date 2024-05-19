@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Card;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 namespace Card_Management
 {
@@ -151,6 +153,34 @@ namespace Card_Management
             {
                 GameManager.Instance.FireGameCompleted(currentScore);
             }
+        }
+
+        public void RestorePreviousMatch(List<int> matchDataMatchedCards, int matchDataScore, int matchDataComboMultiplier)
+        {
+            foreach (var cardIndex in matchDataMatchedCards)
+            {
+                var card = _cards[cardIndex];
+                card.FlipCard();
+                card.SetMatched();
+            }
+
+            currentScore = matchDataScore;
+            currentCombo = matchDataComboMultiplier;
+        }
+
+        public int GetCurrentScore() => currentScore;
+
+        public int GetcurrentCombo() => currentCombo;
+
+        public List<int> GetMatchedCards()
+        {
+            var matchCardsList = new List<int>();
+            for (int i = 0; i < _cards.Count; i++)
+            {
+                if (_cards[i].isMatched)
+                    matchCardsList.Add(i);
+            }
+            return matchCardsList;
         }
     }
 }
