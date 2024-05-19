@@ -59,9 +59,16 @@ namespace Card_Management
             //Create ID list
             var ids = new List<int>();
 
+            var lastGeneratedId = -1;
             for (var i = 0; i < _cards.Count / 2; i++)
             {
-                var idNumber = Random.Range(0, _cardInfoSo.cardIcons.Length);
+                int idNumber;
+
+                do
+                {
+                    idNumber = Random.Range(0, _cardInfoSo.cardIcons.Length);
+                } while (idNumber == lastGeneratedId);
+                
                 ids.Add(idNumber);
                 ids.Add(idNumber);
             }
