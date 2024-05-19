@@ -110,17 +110,14 @@ namespace Card_Management
                 _firstCard = card;
                 _secondCard = null;
             }
-            else
+            else if (_firstCard == null)
             {
-                if (_firstCard == null)
-                {
-                    _firstCard = card;
-                }
-                else if (_secondCard == null)
-                {
-                    _secondCard = card;
-                    ConfirmMatch();
-                }
+                _firstCard = card;
+            }
+            else 
+            {
+                _secondCard = card;
+                ConfirmMatch();
             }
 
             card.FlipCard();
