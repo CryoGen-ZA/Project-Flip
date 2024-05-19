@@ -18,8 +18,10 @@ Additional Features:
 - Menu system (Main menu, Result screen, Pause screen and a Layout selection screen)
 - Randomized card theme, currently there is only two themes, but its designed to easily add more with only a scriptable object setup
 - Combo System
+- Supports both landscape and portrait mode (Note, Unity has a small issue with this and it might require you to move the phone a bit after rotation for the view to update)
 
 Additional notes:
 
-I tried to keep the code as clean and easy to follow as possible with the naming as descriptive as possible.
+- I tried to keep the code as clean and easy to follow as possible with the naming as descriptive as possible.
 For this reason, there is not many comments in the code nor is there any XML function descriptions.
+- I do not own an apple device, so I could not check if the project runs on an iPhone.
