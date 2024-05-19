@@ -136,6 +136,7 @@ namespace Card_Management
             if (_firstCard.cardId != _secondCard.cardId)
             {
                 currentCombo = 0;
+                GameManager.Instance.PlaySFX(_cardInfoSo.matchIncorrectSfx);
                 return;
             }
         
@@ -152,6 +153,7 @@ namespace Card_Management
             if (_currentMatchCount == _cards.Count)
             {
                 GameManager.Instance.FireGameCompleted(currentScore);
+                GameManager.Instance.PlaySFX(_cardInfoSo.completedSfx);
             }
         }
 

@@ -17,5 +17,7 @@ namespace Card
         
         public AudioClip flipSfx;
         public AudioClip matchConfirmedSfx;
+        public AudioClip matchIncorrectSfx;
+        public AudioClip completedSfx;
     }
 }
