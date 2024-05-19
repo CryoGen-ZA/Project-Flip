@@ -41,7 +41,11 @@ namespace Card_Management
                 currentSeed = PlayerData.MatchData.seedKey;
             }
             else
+            {
                 currentSeed = (int)DateTime.Now.Ticks;
+                _rows = PlayerData.layout.y;
+                _columns = PlayerData.layout.x;
+            }
             
             Random.InitState(currentSeed);
             cardInfo = PlayerData.CurrentActiveTheme;
