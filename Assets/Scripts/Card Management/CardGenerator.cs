@@ -6,22 +6,18 @@ namespace Card_Management
 {
     public class CardGenerator
     {
-
+        private readonly int _rows;
+        private readonly int _columns;
+        private readonly Vector2 _cardDimensions;
+        private readonly Vector2 _cardPadding;
+        
         public CardGenerator(int rows, int columns, CardInfoSO cardInfo)
         {
             _rows = rows;
             _columns = columns;
             _cardDimensions = cardInfo.cardDimensions;
             _cardPadding = cardInfo.cardPadding;
-            _cardInfoSo = cardInfo;
         }
-        
-        private int _rows = 4;
-        private int _columns = 3;
-
-        private Vector2 _cardDimensions;
-        private Vector2 _cardPadding;
-        private CardInfoSO _cardInfoSo;
 
         public List<CardController> StartGeneration()
         {
