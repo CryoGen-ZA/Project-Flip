@@ -10,6 +10,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public CardInfoSO[] cardInfo;
     [SerializeField] private Button continueButton;
+    [SerializeField] private GameObject quitButton;
 
     [Header("Layout Options")] 
     [SerializeField] private GameObject LayoutMenu;
@@ -54,10 +55,12 @@ public class MainMenuManager : MonoBehaviour
     {
         LayoutMenu.SetActive(true);
         MainMenu.SetActive(false);
+        quitButton.SetActive(false);
     }
 
     public void DisplayMainMenu()
     {
+        quitButton.SetActive(true);
         LayoutMenu.SetActive(false);
         MainMenu.SetActive(true);
     }

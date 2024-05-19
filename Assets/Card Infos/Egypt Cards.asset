@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e55627f323e2b684892be7dd5806031e, type: 3}
-  m_Name: Basic Cards
+  m_Name: Egypt Cards
   m_EditorClassIdentifier: 
   themeName: Basic
-  cardGraphicFront: {fileID: 21300000, guid: 84026a82976b01b4cbd3fad22984fc9f, type: 3}
-  cardGraphicBack: {fileID: 21300000, guid: a77bab1ea98af66458eea7607b4a6c7f, type: 3}
+  cardGraphicFront: {fileID: -1515063775, guid: f445d0c94ffd0f04dbbd6859aedcec05, type: 3}
+  cardGraphicBack: {fileID: 1323582190, guid: f445d0c94ffd0f04dbbd6859aedcec05, type: 3}
   cardIcons:
-  - {fileID: -157762524, guid: d1c85646581afb048b3079fe82e7483d, type: 3}
-  - {fileID: 578075468, guid: d1c85646581afb048b3079fe82e7483d, type: 3}
-  - {fileID: -1458386372, guid: d1c85646581afb048b3079fe82e7483d, type: 3}
-  - {fileID: -144986418, guid: d1c85646581afb048b3079fe82e7483d, type: 3}
+  - {fileID: -2104526162, guid: 6ccf12b333b11e747a263b2e545217e0, type: 3}
+  - {fileID: -1154083113, guid: 6ccf12b333b11e747a263b2e545217e0, type: 3}
+  - {fileID: -1036962817, guid: 6ccf12b333b11e747a263b2e545217e0, type: 3}
+  - {fileID: -481802303, guid: 6ccf12b333b11e747a263b2e545217e0, type: 3}
   cardDimensions: {x: 1, y: 1.5}
   cardPadding: {x: 0.2, y: 0.2}
   flipTime: 0.5
