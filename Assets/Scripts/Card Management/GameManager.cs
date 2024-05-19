@@ -23,6 +23,7 @@ namespace Card_Management
         public static event Action OnGameRestarted;
 
         private int currentSeed;
+        private bool _paused;
 
         private void Awake()
         {
@@ -37,13 +38,12 @@ namespace Card_Management
             {
                 _rows = PlayerData.MatchData.layoutInfo.y;
                 _columns = PlayerData.MatchData.layoutInfo.x;
-                currentSeed = PlayerData.CurrentSeed;
+                currentSeed = PlayerData.MatchData.seedKey;
             }
             else
-            {
                 currentSeed = (int)DateTime.Now.Ticks;
-                Random.InitState(currentSeed);
-            }
+            
+            Random.InitState(currentSeed);
             cardInfo = PlayerData.CurrentActiveTheme;
         }
 
@@ -82,16 +82,23 @@ namespace Card_Management
             SceneManager.LoadScene("Menu Scene");
         }
 
+        public void QuitAndSave()
+        {
+            SaveGame();
+            LeaveGame();
+        }
+
         public void SaveGame()
         {
-            var playerMatchData = new PlayerMatchData();
-
-            playerMatchData.layoutInfo = new Vector2Int(_columns, _rows);
-            playerMatchData.score = _matchingManager.GetCurrentScore();
-            playerMatchData.comboMultiplier = _matchingManager.GetcurrentCombo();
-            playerMatchData.seedkey = currentSeed;
-            playerMatchData.cardInfoID = cardInfo.themeName;
-            playerMatchData.matchedCards = _matchingManager.GetMatchedCards();
+            var playerMatchData = new PlayerMatchData
+            {
+                layoutInfo = new Vector2Int(_columns, _rows),
+                score = _matchingManager.GetCurrentScore(),
+                comboMultiplier = _matchingManager.GetcurrentCombo(),
+                seedKey = currentSeed,
+                cardInfoID = cardInfo.themeName,
+                matchedCards = _matchingManager.GetMatchedCards()
+            };
 
             PlayerData.MatchData = playerMatchData;
             PlayerDataSerializer.Save();
@@ -141,5 +148,12 @@ namespace Card_Management
             
             _audioSource.PlayOneShot(clip);
         }
+
+        public void PauseGame(bool pause)
+        {
+            _paused = pause;
+        }
+
+        public bool IsGamePaused() => _paused;
     }
 }

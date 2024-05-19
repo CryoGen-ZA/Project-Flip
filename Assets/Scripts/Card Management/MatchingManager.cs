@@ -162,10 +162,13 @@ namespace Card_Management
                 var card = _cards[cardIndex];
                 card.FlipCard();
                 card.SetMatched();
+                _activeCards.Add(card);
             }
 
             currentScore = matchDataScore;
             currentCombo = matchDataComboMultiplier;
+            _currentMatchCount = matchDataMatchedCards.Count;
+            GameManager.Instance.ScoreUpdate(currentScore, currentCombo);
         }
 
         public int GetCurrentScore() => currentScore;
