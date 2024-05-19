@@ -40,13 +40,12 @@ namespace Card_Management
                 var card = _activeCards[index];
             
                 if (card.isMatched && card.IsDoneAnimating() && card.isFlipped)
-                {
                     _activeCards.Remove(card);
-                }
             
-                if (card.IsDoneAnimating() && !card.isFlipped) _activeCards.Remove(card);
+                else if (card.IsDoneAnimating() && !card.isFlipped) 
+                    _activeCards.Remove(card);
             
-                if (card.IsDoneAnimating() && card != _firstCard && card != _secondCard)
+                else if (card.IsDoneAnimating() && card != _firstCard && card != _secondCard)
                     card.FlipCard();
             
                 card.DoUpdate();
