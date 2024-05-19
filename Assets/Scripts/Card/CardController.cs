@@ -108,7 +108,7 @@ namespace Card
             }
             _cardIconRenderer.sprite = _cardIcon;
             var rendererSize = _cardRenderer.size;
-            _cardIconRenderer.size = new Vector2(rendererSize.x / 2, rendererSize.y / 2);
+            _cardIconRenderer.transform.localScale = new Vector3(2, 2, 1);
             _cardIconRenderer.gameObject.SetActive(false);
         }
 

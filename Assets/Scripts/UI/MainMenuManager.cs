@@ -11,6 +11,9 @@ public class MainMenuManager : MonoBehaviour
     public CardInfoSO[] cardInfo;
     [SerializeField] private Button continueButton;
     [SerializeField] private GameObject quitButton;
+    
+    [Header("FPS Toggle")]
+    [SerializeField] private TextMeshProUGUI FpsText;
 
     [Header("Layout Options")] 
     [SerializeField] private GameObject LayoutMenu;
@@ -49,6 +52,9 @@ public class MainMenuManager : MonoBehaviour
     private void Awake()
     {
         continueButton.interactable = PlayerDataSerializer.PlayerHasData();
+        QualitySettings.vSyncCount = 0;
+        FpsText.text = $"{Application.targetFrameRate} FPS";
+        UpdateFPSText();
     }
 
     public void DisplayLayoutField()
@@ -97,6 +103,14 @@ public class MainMenuManager : MonoBehaviour
                 $"Oh oh, {rows} x {columns} results in an uneven amount of cells, please try a different combination";
         
     }
+
+    public void ToggleFPS()
+    {
+        Application.targetFrameRate = Application.targetFrameRate == 60 ? 30 : 60;
+        UpdateFPSText();
+    }
+    
+    private void UpdateFPSText() => FpsText.text = $"{Application.targetFrameRate} FPS";
 
     public void QuitApplication() => Application.Quit();
     private bool IsEven(int totalCards) => totalCards % 2 == 0;
