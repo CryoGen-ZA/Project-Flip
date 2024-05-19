@@ -25,3 +25,5 @@ MonoBehaviour:
   flipTime: 0.5
   flipSfx: {fileID: 8300000, guid: 25594a46e5c49404391f39bb8e2fc437, type: 3}
   matchConfirmedSfx: {fileID: 8300000, guid: 8e10e44172ecde84b83b212633896b57, type: 3}
+  matchIncorrectSfx: {fileID: 8300000, guid: 4f9803f123562b84eb411806053033a3, type: 3}
+  completedSfx: {fileID: 8300000, guid: f612d99e98b6ba2419c3b4e3988bdde6, type: 3}
